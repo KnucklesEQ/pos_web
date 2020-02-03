@@ -6,3 +6,8 @@ abstract class LoginEvent extends Equatable{
   @override
   List<Object> get props => [];
 }
+
+class EventLoginButtonPressed extends LoginEvent{
+  @override
+  String toString() => 'Event_Login_ButtonPressed';
+}

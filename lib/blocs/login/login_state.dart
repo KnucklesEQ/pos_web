@@ -11,3 +11,8 @@ class LoginStateUninitialized extends LoginState{
   @override
   String toString() => 'Login_State_Uninitalized';
 }
+
+class LoginStateGoToWelcomeScreen extends LoginState{
+  @override
+  String toString() => 'Login_State_GoToWelcomeScreen';
+}

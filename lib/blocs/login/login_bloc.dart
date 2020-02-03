@@ -7,6 +7,12 @@ class LoginBloc extends Bloc<LoginEvent ,LoginState>{
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
+    if(event is EventLoginButtonPressed){
+      yield LoginStateGoToWelcomeScreen();
+      yield LoginStateUninitialized();
+
+      return;
+    }
     return;
   }
 }
