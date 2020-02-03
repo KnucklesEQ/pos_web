@@ -8,7 +8,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState>{
   @override
   Stream<AuthenticationState> mapEventToState(AuthenticationEvent event) async* {
     if(event is EventAuthAppStarted){
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(Duration(seconds: 1));
 
       yield AuthStateUnauthenticated();
 

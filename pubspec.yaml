@@ -17,5 +17,17 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/
+
+  fonts:
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/open_sans/OpenSans-Regular.ttf
+        - asset: assets/fonts/open_sans/OpenSans-Italic.ttf
+          style: italic
+        - asset: assets/fonts/open_sans/OpenSans-Bold.ttf
+          weight: 700

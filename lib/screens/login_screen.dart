@@ -1,196 +1,148 @@
 import 'package:flutter/material.dart';
-import 'package:zeive_pos/screens/welcome_screen.dart';
+import 'package:zeive_pos/blocs/login/login.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[200],
-      body: Center(
-        child: SizedBox(
-          width: 400,
-          child: Card(
-            child: SignUpForm(),
-          ),
-        ),
-      ),
-    );
-  }
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class SignUpForm extends StatefulWidget {
-  @override
-  _SignUpFormState createState() => _SignUpFormState();
-}
+class _LoginScreenState extends State<LoginScreen> {
+  LoginBloc _loginBloc;
 
-class _SignUpFormState extends State<SignUpForm>
-    with SingleTickerProviderStateMixin {
-  AnimationController animationController;
-  Animation<Color> colorAnimation;
-  bool _formCompleted = false;
+  final _userTextController = new TextEditingController();
+  final _passTextController = new TextEditingController();
 
   @override
   void initState() {
     super.initState();
 
-    animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(microseconds: 1200),
-    );
+    _loginBloc = new LoginBloc();
+  }
 
-    var colorTween = TweenSequence([
-      TweenSequenceItem(
-        tween: ColorTween(begin: Colors.red, end: Colors.orange),
-        weight: 1,
-      ),
-      TweenSequenceItem(
-        tween: ColorTween(begin: Colors.orange, end: Colors.yellow),
-        weight: 1,
-      ),
-      TweenSequenceItem(
-        tween: ColorTween(begin: Colors.yellow, end: Colors.green),
-        weight: 1,
-      ),
-    ]);
-
-    colorAnimation = animationController.drive(colorTween);
+  @override
+  void dispose() {
+    super.dispose();
+    _loginBloc.close();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        AnimatedBuilder(
-          animation: animationController,
-          builder: (context, child){
-            return LinearProgressIndicator(
-              value: animationController.value,
-              valueColor: colorAnimation,
-              backgroundColor: colorAnimation.value.withOpacity(0.4),
-            );
-          },
+    return Stack(
+      children: <Widget>[
+        Image.asset(
+          "assets/images/bgloginvg.jpg",
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          fit: BoxFit.fitHeight,
         ),
-        SignUpFormBody(
-          onProgressChanged: (progress) {
-            if(!animationController.isAnimating){
-              animationController.animateTo(progress);
-            }
-            setState(() {
-              _formCompleted = (progress == 1);
-            });
-          },
-        ),
-        Container(
-          height: 40,
-          width: double.infinity,
-          margin: EdgeInsets.all(12),
-          child: FlatButton(
-            color: Colors.blue,
-            textColor: Colors.white,
-            onPressed: _formCompleted ? _showWelcomeScreen : null,
-            child: Text('Sign up'),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Center(
+            child: Container(
+              width: 500.0,
+              height: 300.0,
+              color: const Color(0xff171515),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    top: 24.0, bottom: 8.0, left: 32.0, right: 18.0),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      height: 60.0,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text('Usuario',
+                              style: TextStyle(
+                                color: const Color(0xffc1c1c1),
+                                fontSize: 18.0,
+                              )),
+                          Container(
+                            width: 350.0,
+                            color: Color(0xffc1c1c1),
+                            child: TextField(
+                              controller: _userTextController,
+                              cursorColor: const Color(0xff171515),
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: const BorderRadius.all(Radius.circular(0.0)),
+                                  borderSide: BorderSide(color: Color(0xffc1c1c1))
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: const BorderRadius.all(Radius.circular(0.0)),
+                                  borderSide: BorderSide(color: Colors.white)
+                                ),
+                                labelStyle: TextStyle(color: const Color(0xff171515), fontSize: 18.0),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 10.0),
+                    Container(
+                      height: 60.0,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text('Password',
+                              style: TextStyle(
+                                color: const Color(0xffc1c1c1),
+                                fontSize: 18.0,
+                              )),
+                          Container(
+                            width: 350.0,
+                            child: TextField(
+                              controller: _passTextController,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 10.0),
+                    Container(
+                      height: 60.0,
+                      child: Row(
+                        children: <Widget>[
+                          Text(
+                            'Rol',
+                            style: TextStyle(
+                              color: const Color(0xffc1c1c1),
+                              fontSize: 18.0,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Container(
+                            width: 180.0,
+                            height: 40.0,
+                            child: RaisedButton(
+                              color: const Color(0xff707070),
+                              child: Text(
+                                'Entrar',
+                                style: TextStyle(
+                                    color: const Color(0xffc1c1c1),
+                                    fontSize: 18.0),
+                              ),
+                              onPressed: () {},
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
         ),
       ],
-    );
-  }
-
-  void _showWelcomeScreen() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => WelcomeScreen(),
-      ),
-    );
-  }
-}
-
-class SignUpFormBody extends StatefulWidget {
-  final ValueChanged<double> onProgressChanged;
-
-  SignUpFormBody({
-    @required this.onProgressChanged,
-  }) : assert(onProgressChanged != null);
-
-  @override
-  _SignUpFormBodyState createState() => _SignUpFormBodyState();
-}
-
-class _SignUpFormBodyState extends State<SignUpFormBody> {
-  static const EdgeInsets padding = EdgeInsets.all(8);
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
-  final TextEditingController websiteController = TextEditingController();
-
-  List<TextEditingController> get controllers =>
-      [emailController, phoneController, websiteController];
-
-  @override
-  void initState() {
-    super.initState();
-    controllers.forEach((c) => c.addListener(() => _updateProgress()));
-  }
-
-  double get _formProgress {
-    var progress = 0.0;
-    for (var controller in controllers) {
-      if (controller.value.text.isNotEmpty) {
-        progress += 1 / controllers.length;
-      }
-    }
-    return progress;
-  }
-
-  void _updateProgress() {
-    widget.onProgressChanged(_formProgress);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: padding,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: padding,
-            child: Text('Sign up', style: Theme.of(context).textTheme.display1),
-          ),
-          SignUpField(
-            hintText: 'E-mail address',
-            controller: emailController,
-          ),
-          SignUpField(
-            hintText: 'Phone number',
-            controller: phoneController,
-          ),
-          SignUpField(
-            hintText: 'Website',
-            controller: websiteController,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class SignUpField extends StatelessWidget {
-  final String hintText;
-  final TextEditingController controller;
-
-  SignUpField({
-    @required this.hintText,
-    @required this.controller,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(8),
-      child: TextFormField(
-        decoration: InputDecoration(hintText: hintText),
-        controller: controller,
-      ),
     );
   }
 }

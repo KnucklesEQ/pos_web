@@ -29,6 +29,7 @@ class _PosZeiveAppState extends State<PosZeiveApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'OpenSans'),
       home: BlocBuilder(
         bloc: _authenticationBloc,
         builder: (BuildContext context, AuthenticationState state) {
