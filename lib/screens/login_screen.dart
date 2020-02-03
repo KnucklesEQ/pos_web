@@ -11,6 +11,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final _userTextController = new TextEditingController();
   final _passTextController = new TextEditingController();
+  String _dropdownValue = 'Camarero';
 
   @override
   void initState() {
@@ -51,6 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 60.0,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Text('Usuario',
                               style: TextStyle(
@@ -58,22 +60,30 @@ class _LoginScreenState extends State<LoginScreen> {
                                 fontSize: 18.0,
                               )),
                           Container(
-                            width: 350.0,
+                            height: 40.0,
+                            width: 330.0,
                             color: Color(0xffc1c1c1),
                             child: TextField(
+                              textAlignVertical: TextAlignVertical.top,
                               controller: _userTextController,
                               cursorColor: const Color(0xff171515),
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(
-                                  borderRadius: const BorderRadius.all(Radius.circular(0.0)),
-                                  borderSide: BorderSide(color: Color(0xffc1c1c1))
-                                ),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(0.0)),
+                                    borderSide:
+                                        BorderSide(color: Color(0xffc1c1c1))),
                                 focusedBorder: OutlineInputBorder(
-                                  borderRadius: const BorderRadius.all(Radius.circular(0.0)),
-                                  borderSide: BorderSide(color: Colors.white)
-                                ),
-                                labelStyle: TextStyle(color: const Color(0xff171515), fontSize: 18.0),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(0.0)),
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
+                                labelStyle: TextStyle(
+                                    color: const Color(0xff171515),
+                                    fontSize: 18.0),
                               ),
+                              maxLines: 1,
+                              autofocus: true,
                             ),
                           ),
                         ],
@@ -84,6 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 60.0,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Text('Password',
                               style: TextStyle(
@@ -91,9 +102,30 @@ class _LoginScreenState extends State<LoginScreen> {
                                 fontSize: 18.0,
                               )),
                           Container(
-                            width: 350.0,
+                            height: 40.0,
+                            width: 330.0,
+                            color: Color(0xffc1c1c1),
                             child: TextField(
+                              textAlignVertical: TextAlignVertical.top,
                               controller: _passTextController,
+                              cursorColor: const Color(0xff171515),
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(0.0)),
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(0.0)),
+                                    borderSide:
+                                        BorderSide(color: Colors.white)),
+                                labelStyle: TextStyle(
+                                    color: const Color(0xff171515),
+                                    fontSize: 18.0),
+                              ),
+                              maxLines: 1,
+                              obscureText: true,
                             ),
                           ),
                         ],
@@ -103,6 +135,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     Container(
                       height: 60.0,
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Text(
                             'Rol',
@@ -110,7 +144,40 @@ class _LoginScreenState extends State<LoginScreen> {
                               color: const Color(0xffc1c1c1),
                               fontSize: 18.0,
                             ),
-                          )
+                          ),
+                          Container(
+                            height: 40.0,
+                            width: 330.0,
+                            color: Color(0xffc1c1c1),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: DropdownButton<String>(
+                                value: _dropdownValue,
+                                items: <String>[
+                                  'Camarero',
+                                  'Encargado',
+                                  'Administrador',
+                                  'Otro'
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    _dropdownValue = newValue;
+                                  });
+                                },
+                                isExpanded: true,
+                                iconSize: 40.0,
+                                style: TextStyle(
+                                  color: const Color(0xff171515),
+                                  fontSize: 18.0,
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
