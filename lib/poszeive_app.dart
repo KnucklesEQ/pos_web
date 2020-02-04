@@ -4,7 +4,7 @@ import 'package:zeive_pos/blocs/authentication/authentication.dart';
 import 'package:zeive_pos/screens/loading_screen.dart';
 import 'package:zeive_pos/screens/login_screen.dart';
 import 'package:zeive_pos/screens/splash_screen.dart';
-import 'package:zeive_pos/screens/welcome_screen.dart';
+import 'package:zeive_pos/screens/welcome_screen/welcome_screen.dart';
 
 class PosZeiveApp extends StatefulWidget {
   @override

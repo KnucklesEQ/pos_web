@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zeive_pos/blocs/login/login.dart';
-import 'package:zeive_pos/screens/welcome_screen.dart';
+import 'package:zeive_pos/screens/welcome_screen/welcome_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override

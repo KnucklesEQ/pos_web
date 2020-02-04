@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class WelcomeScreen extends StatelessWidget {
+class SupportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text('Welcome!', style: Theme.of(context).textTheme.display3),
+        child: Text('Bienvenido a Soporte!', style: Theme.of(context).textTheme.display3),
       ),
     );
   }
