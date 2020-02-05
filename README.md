@@ -1,6 +1,6 @@
-# zeive_pos
+# POS Web
 
-The Zeive POS on the web with Flutter
+The Web POS with Flutter/Dart
 
 ## Getting Started
 
